@@ -87,8 +87,8 @@ def send_new_position_message(symbol, row, nickname):
     updatetime = row['updateTime']
     pnl_emoji = "🟢" if pnl >= 0 else "🔴"
     message = (
-        f"🚀 [<b>{nickname}</b>]\n"
-        f"📌 <b>New position opened</b>\n\n"
+        f"⚠️ [<b>{nickname}</b>]\n"
+        f"❇️ <b>New position opened</b>\n\n"
         f"📊 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
         f"💵 Base currency - USDT\n"
         f"------------------------------\n"
@@ -106,8 +106,8 @@ def send_closed_position_message(symbol, row, nickname):
     leverage = row['leverage']
     updatetime = row['updateTime']
     message = (
-        f"🚀 [<b>{nickname}</b>]\n"
-        f"📌 <b>Position closed</b>\n\n"
+        f"⚠️ [<b>{nickname}</b>]\n"
+        f"⛔️ <b>Position closed</b>\n\n"
         f"📊 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n"
         f"💵 <b>Current Price:</b> {get_markprice(symbol)} USDT\n\n"
         f"🕒 <b>Last Update:</b>\n{updatetime} \n"  # <-- Diubah di sini
@@ -118,9 +118,9 @@ def send_closed_position_message(symbol, row, nickname):
 # Function to send current positions
 def send_current_positions(position_result, nickname):
     if position_result.empty:
-        telegram_send_message(f"🚀 [<b>{nickname}</b>]\n📌 <b>No positions found</b>")
+        telegram_send_message(f"⚠️ [<b>{nickname}</b>]\n💎 <b>No positions found</b>")
     else:
-        telegram_send_message(f"🚀 [<b>{nickname}</b>]\n📌 <b>Current positions:</b>")
+        telegram_send_message(f"⚠️ [<b>{nickname}</b>]\n💎 <b>Current positions:</b>")
         for symbol, row in position_result.iterrows():
             estimated_position = row['estimatedPosition']
             leverage = row['leverage']
@@ -130,7 +130,7 @@ def send_current_positions(position_result, nickname):
             updatetime = row['updateTime']
             pnl_emoji = "🟢" if pnl >= 0 else "🔴"
             message = (
-                f"📊 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
+                f"🔄 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
                 f"💵 Base currency - USDT\n"
                 f"------------------------------\n"
                 f"🎯 <b>Entry Price:</b> {entry_price}\n"
