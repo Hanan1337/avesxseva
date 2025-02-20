@@ -3,120 +3,139 @@ import time
 import json
 import requests
 import datetime
-import os
 from misc import get_header, get_json
-from datetime import datetime, timedelta
+from datetime import timedelta
 from message import telegram_send_message
 from binance import get_position, get_nickname, get_markprice
 
-# Load UIDs from uids.json
-with open('uids.json', 'r') as f:
-    TARGETED_ACCOUNT_UIDS = json.load(f)
+# Enter BUID (Binance User ID) of targeted accounts
+def load_uids():
+    try:
+        with open('uids.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("File uids.json tidak ditemukan. Jalankan setup.py terlebih dahulu.")
+        sys.exit(1)
+    except json.JSONDecodeError:
+        print("Format uids.json tidak valid.")
+        sys.exit(1)
 
-# Template URL for Binance account info
+TARGETED_ACCOUNT_UIDs = load_uids()
+
 ACCOUNT_INFO_URL_TEMPLATE = 'https://www.binance.com/en/futures-activity/leaderboard/user?encryptedUid={}'
 
-# Function to modify DataFrame
+# Modifying DataFrame, including calculating estimated entry size in USDT
 def modify_data(data) -> pd.DataFrame:
-    # Pastikan data['otherPositionRetList'] ada dan tidak kosong
-    if 'otherPositionRetList' not in data or not data['otherPositionRetList']:
-        return pd.DataFrame()  # Kembalikan DataFrame kosong jika tidak ada data
+    """
+    Memproses data posisi trading dari API terbaru Binance.
+    
+    Parameters:
+        data (dict): Data mentah dari API Binance.
+    
+    Returns:
+        pd.DataFrame: DataFrame yang berisi posisi trading yang diproses.
+    """
+    if not data or 'data' not in data or 'otherPositionRetList' not in data['data']:
+        print("Invalid data structure received from API.")
+        return pd.DataFrame()
 
-    # Buat DataFrame dari otherPositionRetList
-    position_list = data['otherPositionRetList']
-    
-    # Pastikan semua field yang diperlukan ada di setiap entri
-    for position in position_list:
-        if 'symbol' not in position:
-            position['symbol'] = 'UNKNOWN'  # Berikan nilai default jika symbol tidak ada
-        if 'amount' not in position:
-            position['amount'] = 0.0  # Berikan nilai default jika amount tidak ada
-        if 'leverage' not in position:
-            position['leverage'] = 1.0  # Berikan nilai default jika leverage tidak ada
-        if 'entryPrice' not in position:
-            position['entryPrice'] = 0.0  # Berikan nilai default jika entryPrice tidak ada
-        if 'markPrice' not in position:
-            position['markPrice'] = 0.0  # Berikan nilai default jika markPrice tidak ada
-        if 'pnl' not in position:
-            position['pnl'] = 0.0  # Berikan nilai default jika pnl tidak ada
-        if 'updateTimeStamp' not in position:
-            position['updateTimeStamp'] = 0  # Berikan nilai default jika updateTimeStamp tidak ada
+    positions = data['data']['otherPositionRetList']
+    df = pd.DataFrame(positions)
 
-    # Buat DataFrame
-    position = pd.DataFrame(position_list).set_index('symbol')
-    
-    # Hitung estimatedEntrySize dan tambahkan kolom baru
-    position['estimatedEntrySize'] = round((abs(position['amount']) / position['leverage']) * position['entryPrice'], 2)
-    position['pnl'] = round(position['pnl'], 2)
+    # Debugging: Cetak kolom yang tersedia
+    print("Available columns in DataFrame:", df.columns.tolist())
 
-    # *** Add this line to create the 'estimatedPosition' column ***
-    position['estimatedPosition'] = position['amount'].apply(lambda x: 'LONG' if x > 0 else 'SHORT')
-    
-    # Ubah waktu ke UTC+7 (WIB)
-    position['updateTime'] = position['updateTimeStamp'].apply(
-        lambda x: (datetime.utcfromtimestamp(x / 1000) + timedelta(hours=7)).strftime('%Y-%m-%d %H:%M:%S (UTC+7)')
-    )
-    
-    return position[['estimatedPosition', 'leverage', 'estimatedEntrySize', 'amount',
-                     'entryPrice', 'markPrice', 'pnl', 'updateTime']]
-    
-    # Tentukan posisi (LONG/SHORT)
-    position.loc[(position['amount'] > 0), 'estimatedPosition'] = 'LONG'
-    position.loc[(position['amount'] < 0), 'estimatedPosition'] = 'SHORT'
-    
-    # Format updateTime
-    position['updateTime'] = position['updateTimeStamp'].apply(lambda x: datetime.datetime.fromtimestamp(x / 1000).strftime('%Y-%m-%d %H:%M:%S'))
-    
-    # Pilih kolom yang akan dikembalikan
-    position_result = position[['estimatedPosition', 'leverage', 'estimatedEntrySize', 'amount',
-                               'entryPrice', 'markPrice', 'pnl', 'updateTime']]
+    # Pastikan kolom 'symbol' ada di DataFrame
+    if 'symbol' not in df.columns:
+        print("Column 'symbol' not found in DataFrame.")
+        return pd.DataFrame()
+
+    # Set 'symbol' sebagai index
+    df.set_index('symbol', inplace=True)
+
+    # Menghitung estimatedEntrySize
+    df['estimatedEntrySize'] = round((abs(df['amount']) / df['leverage']) * df['entryPrice'], 2)
+
+    # Menentukan posisi (LONG/SHORT)
+    df['estimatedPosition'] = df['amount'].apply(lambda x: 'LONG' if x > 0 else 'SHORT')
+
+    # Memformat waktu update (UTC+7)
+    df['updateTime'] = df['updateTime'].apply(lambda x: datetime.datetime(*x[:-1], x[-1] // 1000))
+    df['updateTime'] = df['updateTime'] + timedelta(hours=7)  # Konversi ke UTC+7
+    df['updateTime'] = df['updateTime'].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Memilih kolom yang diperlukan
+    position_result = df[['estimatedPosition', 'leverage', 'estimatedEntrySize', 
+                          'entryPrice', 'markPrice', 'pnl', 'updateTime']]
     return position_result
 
-# Global variables to track previous positions
 previous_symbols = {}
 previous_position_results = {}
-is_first_runs = {uid: True for uid in TARGETED_ACCOUNT_UIDS}
+is_first_runs = {uid: True for uid in TARGETED_ACCOUNT_UIDs}
 
 # Function to send new position message
 def send_new_position_message(symbol, row, nickname):
+    """
+    Mengirim pesan Telegram ketika posisi baru dibuka.
+    
+    Parameters:
+        symbol (str): Simbol trading (misalnya, BTCUSDT).
+        row (pd.Series): Baris DataFrame yang berisi detail posisi.
+        nickname (str): Nickname dari trader.
+    """
     estimated_position = row['estimatedPosition']
     leverage = row['leverage']
     estimated_entry_size = row['estimatedEntrySize']
     entry_price = row['entryPrice']
     pnl = row['pnl']
     updatetime = row['updateTime']
-    pnl_emoji = "🟢" if pnl >= 0 else "🔴"
+    pnl_emoji = "🟢" if pnl >= 0 else "🔴"  # Emoji untuk PnL positif/negatif
     message = (
         f"⚠️ [<b>{nickname}</b>]\n"
         f"❇️ <b>New position opened</b>\n\n"
-        f"📊 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
-        f"💵 Base currency - USDT\n"
+        f"<b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
+        f"Base currency - USDT\n"
         f"------------------------------\n"
         f"🎯 <b>Entry Price:</b> {entry_price}\n"
         f"💰 <b>Est. Entry Size:</b> {estimated_entry_size}\n"
         f"{pnl_emoji} <b>PnL:</b> {pnl}\n\n"
-        f"🕒 <b>Last Update:</b>\n{updatetime} \n"
-        f"🔗 <a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
+        f"<b>Last Update:</b>\n{updatetime} (UTC+7)\n"
+        f"<a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
     )
     telegram_send_message(message)
 
 # Function to send closed position message
 def send_closed_position_message(symbol, row, nickname):
+    """
+    Mengirim pesan Telegram ketika posisi ditutup.
+    
+    Parameters:
+        symbol (str): Simbol trading.
+        row (pd.Series): Baris DataFrame yang berisi detail posisi.
+        nickname (str): Nickname dari trader.
+    """
     estimated_position = row['estimatedPosition']
     leverage = row['leverage']
     updatetime = row['updateTime']
     message = (
         f"⚠️ [<b>{nickname}</b>]\n"
         f"⛔️ <b>Position closed</b>\n\n"
-        f"📊 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n"
-        f"💵 <b>Current Price:</b> {get_markprice(symbol)} USDT\n\n"
-        f"🕒 <b>Last Update:</b>\n{updatetime} \n"  # <-- Diubah di sini
-        f"🔗 <a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
+        f"<b>Position:</b> {symbol} {estimated_position} {leverage}X\n"
+        f"<b>Current Price:</b> {get_markprice(symbol)} USDT\n\n"
+        f"<b>Last Update:</b>\n{updatetime} (UTC+7)\n"
+        f"<a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
     )
     telegram_send_message(message)
 
 # Function to send current positions
 def send_current_positions(position_result, nickname):
+    """
+    Mengirim pesan Telegram dengan daftar posisi saat ini.
+    
+    Parameters:
+        position_result (pd.DataFrame): DataFrame yang berisi posisi saat ini.
+        nickname (str): Nickname dari trader.
+    """
     if position_result.empty:
         telegram_send_message(f"⚠️ [<b>{nickname}</b>]\n💎 <b>No positions found</b>")
     else:
@@ -128,44 +147,40 @@ def send_current_positions(position_result, nickname):
             entry_price = row['entryPrice']
             pnl = row['pnl']
             updatetime = row['updateTime']
-            pnl_emoji = "🟢" if pnl >= 0 else "🔴"
+            pnl_emoji = "🟢" if pnl >= 0 else "🔴"  # Emoji untuk PnL positif/negatif
             message = (
-                f"🔄 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
-                f"💵 Base currency - USDT\n"
+                f"<b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
+                f"Base currency - USDT\n"
                 f"------------------------------\n"
                 f"🎯 <b>Entry Price:</b> {entry_price}\n"
                 f"💰 <b>Est. Entry Size:</b> {estimated_entry_size}\n"
                 f"{pnl_emoji} <b>PnL:</b> {pnl}\n\n"
-                f"🕒 <b>Last Update:</b>\n{updatetime} \n"
-                f"🔗 <a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
+                f"<b>Last Update:</b>\n{updatetime} (UTC+7)\n"
+                f"<a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
             )
             telegram_send_message(message)
 
-# Main loop
 while True:
     try:
-        for TARGETED_ACCOUNT_UID in TARGETED_ACCOUNT_UIDS:
+        for TARGETED_ACCOUNT_UID in TARGETED_ACCOUNT_UIDs:
             ACCOUNT_INFO_URL = ACCOUNT_INFO_URL_TEMPLATE.format(TARGETED_ACCOUNT_UID)
             headers = get_header(ACCOUNT_INFO_URL)
             json_data = get_json(TARGETED_ACCOUNT_UID)
 
-            # ========== PERBAIKAN UTAMA DI SINI ========== #
-            response_nickname = get_nickname(TARGETED_ACCOUNT_UID)
-            response = get_position(TARGETED_ACCOUNT_UID)
+            response_nickname = get_nickname(headers, json_data)
+            response = get_position(headers, json_data)
+            if response is not None and response_nickname is not None:
+                nickname_data = json.loads(response_nickname.text)
+                if 'data' in nickname_data and 'nickName' in nickname_data['data']:
+                    nickname = nickname_data['data']['nickName']
+                else:
+                    print("Failed to retrieve nickname from API response.")
+                    telegram_send_message("Failed to retrieve nickname from API response.")
+                    continue
 
-            if (
-                response is not None 
-                and response.get("success", False) 
-                and response_nickname is not None 
-                and response_nickname.get("success", False)
-            ):
-                nickname = response_nickname["data"]["nickName"]  # Definisikan nickname di sini
-                print("API Response:", json.dumps(response, indent=2))
-                leaderboard_data = response["data"]
+                leaderboard_data = json.loads(response.text)
                 position_result = modify_data(leaderboard_data)
-                print("Processed Data:\n", position_result)
 
-                # Pindahkan SEMUA logika pengiriman pesan ke dalam blok ini
                 new_symbols = position_result.index.difference(previous_symbols.get(TARGETED_ACCOUNT_UID, pd.Index([])))
                 if not is_first_runs[TARGETED_ACCOUNT_UID] and not new_symbols.empty:
                     for symbol in new_symbols:
@@ -183,15 +198,11 @@ while True:
                 previous_position_results[TARGETED_ACCOUNT_UID] = position_result.copy()
                 previous_symbols[TARGETED_ACCOUNT_UID] = position_result.index.copy()
                 is_first_runs[TARGETED_ACCOUNT_UID] = False
-
-            else:
-                print(f"⚠️ Gagal memproses UID {TARGETED_ACCOUNT_UID}")
-                print("Nickname Response:", json.dumps(response_nickname, indent=2) if response_nickname else "No nickname response")
-                print("Position Response:", json.dumps(response, indent=2) if response else "No position response")
-
+                
         time.sleep(300)
     except Exception as e:
         print(f"Error occurred: {e}")
-        message = f"Error occurred for UID <b>{TARGETED_ACCOUNT_UID}</b>:\n{e}\n\nRetrying after 60s"
+        message = f"Error occurred for UID <b>{TARGETED_ACCOUNT_UID}</b>:\n{e}\n\n" \
+                  f"Retrying after 60s"
         telegram_send_message(message)
         time.sleep(60)
