@@ -3,21 +3,33 @@ import time
 import json
 import requests
 import datetime
+import logging
+import sys
 from misc import get_header, get_json
 from datetime import timedelta
 from message import telegram_send_message
 from binance import get_position, get_nickname, get_markprice
 
-# Enter BUID (Binance User ID) of targeted accounts
+# Konfigurasi logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('bot.log'),
+        logging.StreamHandler()
+    ]
+)
+
+# Load UIDs dari file JSON
 def load_uids():
     try:
         with open('uids.json', 'r') as f:
             return json.load(f)
     except FileNotFoundError:
-        print("File uids.json tidak ditemukan. Jalankan setup.py terlebih dahulu.")
+        logging.error("File uids.json tidak ditemukan. Jalankan setup.py terlebih dahulu.")
         sys.exit(1)
     except json.JSONDecodeError:
-        print("Format uids.json tidak valid.")
+        logging.error("Format uids.json tidak valid.")
         sys.exit(1)
 
 TARGETED_ACCOUNT_UIDs = load_uids()
@@ -36,18 +48,18 @@ def modify_data(data) -> pd.DataFrame:
         pd.DataFrame: DataFrame yang berisi posisi trading yang diproses.
     """
     if not data or 'data' not in data or 'otherPositionRetList' not in data['data']:
-        print("Invalid data structure received from API.")
+        logging.warning("Invalid data structure received from API.")
         return pd.DataFrame()
 
     positions = data['data']['otherPositionRetList']
     df = pd.DataFrame(positions)
 
     # Debugging: Cetak kolom yang tersedia
-    print("Available columns in DataFrame:", df.columns.tolist())
+    logging.info(f"Available columns in DataFrame: {df.columns.tolist()}")
 
     # Pastikan kolom 'symbol' ada di DataFrame
     if 'symbol' not in df.columns:
-        print("Column 'symbol' not found in DataFrame.")
+        logging.error("Column 'symbol' not found in DataFrame.")
         return pd.DataFrame()
 
     # Set 'symbol' sebagai index
@@ -94,13 +106,13 @@ def send_new_position_message(symbol, row, nickname):
         f"⚠️ [<b>{nickname}</b>]\n"
         f"❇️ <b>New position opened</b>\n\n"
         f"<b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
-        f"Base currency - USDT\n"
+        f"💵 Base currency - USDT\n"
         f"------------------------------\n"
         f"🎯 <b>Entry Price:</b> {entry_price}\n"
         f"💰 <b>Est. Entry Size:</b> {estimated_entry_size}\n"
         f"{pnl_emoji} <b>PnL:</b> {pnl}\n\n"
-        f"<b>Last Update:</b>\n{updatetime} (UTC+7)\n"
-        f"<a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
+        f"🕒 <b>Last Update:</b>\n{updatetime} (UTC+7)\n"
+        f"🔗 <a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
     )
     telegram_send_message(message)
 
@@ -121,9 +133,9 @@ def send_closed_position_message(symbol, row, nickname):
         f"⚠️ [<b>{nickname}</b>]\n"
         f"⛔️ <b>Position closed</b>\n\n"
         f"<b>Position:</b> {symbol} {estimated_position} {leverage}X\n"
-        f"<b>Current Price:</b> {get_markprice(symbol)} USDT\n\n"
-        f"<b>Last Update:</b>\n{updatetime} (UTC+7)\n"
-        f"<a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
+        f"💵 <b>Current Price:</b> {get_markprice(symbol)} USDT\n\n"
+        f"🕒 <b>Last Update:</b>\n{updatetime} (UTC+7)\n"
+        f"🔗 <a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
     )
     telegram_send_message(message)
 
@@ -149,19 +161,21 @@ def send_current_positions(position_result, nickname):
             updatetime = row['updateTime']
             pnl_emoji = "🟢" if pnl >= 0 else "🔴"  # Emoji untuk PnL positif/negatif
             message = (
-                f"<b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
-                f"Base currency - USDT\n"
+                f"🔄 <b>Position:</b> {symbol} {estimated_position} {leverage}X\n\n"
+                f"💵 Base currency - USDT\n"
                 f"------------------------------\n"
                 f"🎯 <b>Entry Price:</b> {entry_price}\n"
                 f"💰 <b>Est. Entry Size:</b> {estimated_entry_size}\n"
                 f"{pnl_emoji} <b>PnL:</b> {pnl}\n\n"
-                f"<b>Last Update:</b>\n{updatetime} (UTC+7)\n"
-                f"<a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
+                f"🕒 <b>Last Update:</b>\n{updatetime} (UTC+7)\n"
+                f"🔗 <a href='{ACCOUNT_INFO_URL}'><b>VIEW PROFILE ON BINANCE</b></a>"
             )
             telegram_send_message(message)
 
 while True:
     try:
+        start_time = time.time()  # Catat waktu mulai iterasi
+        
         for TARGETED_ACCOUNT_UID in TARGETED_ACCOUNT_UIDs:
             ACCOUNT_INFO_URL = ACCOUNT_INFO_URL_TEMPLATE.format(TARGETED_ACCOUNT_UID)
             headers = get_header(ACCOUNT_INFO_URL)
@@ -174,7 +188,7 @@ while True:
                 if 'data' in nickname_data and 'nickName' in nickname_data['data']:
                     nickname = nickname_data['data']['nickName']
                 else:
-                    print("Failed to retrieve nickname from API response.")
+                    logging.error("Failed to retrieve nickname from API response.")
                     telegram_send_message("Failed to retrieve nickname from API response.")
                     continue
 
@@ -198,10 +212,16 @@ while True:
                 previous_position_results[TARGETED_ACCOUNT_UID] = position_result.copy()
                 previous_symbols[TARGETED_ACCOUNT_UID] = position_result.index.copy()
                 is_first_runs[TARGETED_ACCOUNT_UID] = False
-                
-        time.sleep(300)
+
+        # Hitung waktu eksekusi dan log
+        ping_time = (time.time() - start_time) * 1000  # Konversi ke milidetik
+        current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        logging.info(f"✅ Bot is still running | Time: {current_time} | Ping: {ping_time:.2f}ms")
+        
+        time.sleep(150)
+        
     except Exception as e:
-        print(f"Error occurred: {e}")
+        logging.error(f"Error occurred: {e}")
         message = f"Error occurred for UID <b>{TARGETED_ACCOUNT_UID}</b>:\n{e}\n\n" \
                   f"Retrying after 60s"
         telegram_send_message(message)
