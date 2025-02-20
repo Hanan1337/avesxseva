@@ -2,34 +2,30 @@ import requests
 import time
 from message import telegram_send_message
 
-# RapidAPI Key (simpan langsung di script)
-RAPIDAPI_KEY = "7ccaedf5b1msh05d118514652180p1c45f8jsne50e34c1891f"  # Ganti dengan API key Anda
-
-def get_position(encrypted_uid: str, max_retries=5):
+def get_position(headers, json_data, max_retries=5):
     """
-    Mendapatkan posisi trading dari API pihak ketiga.
+    Mendapatkan posisi trading dari Binance Futures Leaderboard menggunakan API terbaru.
     
-    :param encrypted_uid: UID terenkripsi dari akun yang ingin dilacak.
-    :param max_retries: Jumlah maksimum percobaan ulang jika terjadi kesalahan.
-    :return: Response dari API atau None jika gagal setelah max_retries.
+    Parameters:
+        headers (dict): Header yang diperlukan untuk request HTTP.
+        json_data (dict): Payload yang dikirim sebagai body request.
+        max_retries (int): Jumlah maksimum percobaan ulang jika terjadi kesalahan koneksi.
+    
+    Returns:
+        requests.Response: Respons dari API.
     """
-    url = "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPosition"
-    headers = {
-        "x-rapidapi-key": RAPIDAPI_KEY,
-        "x-rapidapi-host": "binance-futures-leaderboard1.p.rapidapi.com"
-    }
-    querystring = {"encryptedUid": encrypted_uid, "tradeType": "PERPETUAL"}
-
+    url = "https://www.binance.com/bapi/futures/v2/private/future/leaderboard/getOtherPosition"
     retry_count = 0
+
     while retry_count <= max_retries:
         try:
-            response = requests.get(url, headers=headers, params=querystring)
+            response = requests.post(url, headers=headers, json=json_data)
             if response.status_code == 200:
-                return response.json()  # Mengembalikan data JSON jika sukses
+                return response
             else:
-                print(f"Error: {response.status_code} - {response.text}")
-                telegram_send_message(f"Error: {response.status_code} - {response.text}")
-                return None
+                print(f"API request failed with status code: {response.status_code}")
+                telegram_send_message(f"API request failed with status code: {response.status_code}")
+                raise requests.exceptions.RequestException(f"Status code: {response.status_code}")
         except requests.exceptions.RequestException as e:
             print(f"Connection error occurred: {e}")
             telegram_send_message(f"Connection error occurred: {e}")
@@ -43,31 +39,30 @@ def get_position(encrypted_uid: str, max_retries=5):
                 retry_count += 1
     return None
 
-def get_nickname(encrypted_uid: str, max_retries=5):
+def get_nickname(headers, json_data, max_retries=5):
     """
-    Mendapatkan informasi dasar leaderboard (termasuk nickname) dari API pihak ketiga.
+    Mendapatkan informasi dasar (seperti nickname) dari trader di Binance Futures Leaderboard menggunakan API terbaru.
     
-    :param encrypted_uid: UID terenkripsi dari akun yang ingin dilacak.
-    :param max_retries: Jumlah maksimum percobaan ulang jika terjadi kesalahan.
-    :return: Response dari API atau None jika gagal setelah max_retries.
+    Parameters:
+        headers (dict): Header yang diperlukan untuk request HTTP.
+        json_data (dict): Payload yang dikirim sebagai body request.
+        max_retries (int): Jumlah maksimum percobaan ulang jika terjadi kesalahan koneksi.
+    
+    Returns:
+        requests.Response: Respons dari API.
     """
-    url = "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherLeaderboardBaseInfo"
-    headers = {
-        "x-rapidapi-key": RAPIDAPI_KEY,
-        "x-rapidapi-host": "binance-futures-leaderboard1.p.rapidapi.com"
-    }
-    querystring = {"encryptedUid": encrypted_uid}
-
+    url = "https://www.binance.com/bapi/futures/v2/public/future/leaderboard/getOtherLeaderboardBaseInfo"
     retry_count = 0
+
     while retry_count <= max_retries:
         try:
-            response = requests.get(url, headers=headers, params=querystring)
+            response = requests.post(url, headers=headers, json=json_data)
             if response.status_code == 200:
-                return response.json()  # Mengembalikan data JSON jika sukses
+                return response
             else:
-                print(f"Error: {response.status_code} - {response.text}")
-                telegram_send_message(f"Error: {response.status_code} - {response.text}")
-                return None
+                print(f"API request failed with status code: {response.status_code}")
+                telegram_send_message(f"API request failed with status code: {response.status_code}")
+                raise requests.exceptions.RequestException(f"Status code: {response.status_code}")
         except requests.exceptions.RequestException as e:
             print(f"Connection error occurred: {e}")
             telegram_send_message(f"Connection error occurred: {e}")
