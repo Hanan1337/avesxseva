@@ -1,0 +1,326 @@
+{
+  "data": {
+    "xdt_viewer": {
+      "user": {
+        "pk": "30149518596",
+        "id": "30149518596",
+        "user_id": "30149518596",
+        "can_see_organic_insights": false
+      }
+    },
+    "xdt_api__v1__feed__reels_media__connection": {
+      "edges": [
+        {
+          "node": {
+            "id": "highlight:18104451496450498",
+            "items": [
+              {
+                "pk": "3491876463639486921",
+                "id": "3491876463639486921_1624593034",
+                "has_audio": null,
+                "story_music_stickers": null,
+                "user": {
+                  "pk": "1624593034",
+                  "id": "1624593034",
+                  "interop_messaging_user_fbid": null
+                },
+                "inventory_source": null,
+                "boosted_status": null,
+                "boost_unavailable_identifier": null,
+                "boost_unavailable_reason": null,
+                "product_type": "story",
+                "carousel_media_count": null,
+                "carousel_media": null,
+                "media_overlay_info": null,
+                "caption": null,
+                "accessibility_caption": "Photo by The New York Times on November 01, 2024. Keterangan foto tidak tersedia..",
+                "image_versions2": {
+                  "candidates": [
+                    {
+                      "height": 2293,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/465085893_18476860705017035_3561765173593396970_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=jtCQuMDQY28Q7kNvgF6-KYg&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3NjQ2MzYzOTQ4NjkyMQ%3D%3D.3-ccb7-5&oh=00_AYEd5ui9rQcmCSuJ3gcgpb3o0p3inluKoreSVeNqUaIDuA&oe=67D30660&_nc_sid=5a0a6d",
+                      "width": 1290
+                    },
+                    {
+                      "height": 1920,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/465085893_18476860705017035_3561765173593396970_n.jpg?stp=dst-jpg_e35_p1080x1080_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=jtCQuMDQY28Q7kNvgF6-KYg&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3NjQ2MzYzOTQ4NjkyMQ%3D%3D.3-ccb7-5&oh=00_AYEGmSv3YxuppB6ZJXNnEIqyJlpNtWE6fVFW9Nv_vuN-RA&oe=67D30660&_nc_sid=5a0a6d",
+                      "width": 1080
+                    }
+                  ]
+                },
+                "organic_tracking_token": "eyJ2ZXJzaW9uIjo1LCJwYXlsb2FkIjp7ImlzX2FuYWx5dGljc190cmFja2VkIjp0cnVlLCJ1dWlkIjoiNjVjMmMyNmMxMjE5NDcwN2IxYWRkMmY5NDJjMTY4MWIzNDkxODc2NDYzNjM5NDg2OTIxIiwic2VydmVyX3Rva2VuIjoiMTc0MTQ5Njg5NTUwMHwzNDkxODc2NDYzNjM5NDg2OTIxfDMwMTQ5NTE4NTk2fDIyODY4NjI5Yzk3NmIyZjQ1NmYxNmVmNjQyZDZjOTUyYWUxZDVmY2U1MTM3ZWUzZTI4NGY3MjZhN2M0NTQwYjYifSwic2lnbmF0dXJlIjoiIn0=",
+                "original_width": 1290,
+                "original_height": 2293,
+                "taken_at": 1730484130,
+                "is_dash_eligible": null,
+                "number_of_qualities": null,
+                "video_dash_manifest": null,
+                "video_versions": null,
+                "media_type": 1,
+                "visual_comment_reply_sticker_info": null,
+                "story_bloks_stickers": null,
+                "story_link_stickers": [
+                  {
+                    "x": 0.25426358954851,
+                    "y": 0.42456394683483,
+                    "width": 0.361550387596899,
+                    "height": 0.053372093023255004,
+                    "rotation": 0.0,
+                    "story_link": {
+                      "url": "https://l.instagram.com/?u=https%3A%2F%2Fwww.nytimes.com%2Fexplain%2F2024%2F10%2F28%2Finsider%2Felections-reader-questions%3Futm_source%3Dinstagram%26utm_medium%3Dsocial%26utm_campaign%3Dig-stories%26utm_content%3Dig-nytimes%26fbclid%3DPAZXh0bgNhZW0CMTEAAaaRfQylmKMs2VxszcDXJUvht8BmTETrQOFFjX-anoV2t-J2tMq3YKD-bWo_aem_PE_Sa9ijn_CewvFfZDeQSw&e=AT2eWmDzsncEyxtfMEVPP_57N-q9BTrRF5x7TQbb7fxWbpQka-FOq9yDfG6096IcICqHArONOxgCtiYIzECsLfFhl4NCR43RVaxi1NM"
+                    },
+                    "id": null
+                  }
+                ],
+                "story_hashtags": null,
+                "story_locations": null,
+                "story_feed_media": null,
+                "text_post_share_to_ig_story_stickers": null,
+                "story_countdowns": null,
+                "story_questions": null,
+                "story_sliders": null,
+                "story_cta": null,
+                "link": null,
+                "reel_media_background": null,
+                "video_duration": null,
+                "preview": null,
+                "expiring_at": null,
+                "is_paid_partnership": false,
+                "sponsor_tags": null,
+                "reshared_story_media_author": null,
+                "story_app_attribution": null,
+                "has_translation": false,
+                "can_see_insights_as_brand": false,
+                "audience": null,
+                "has_liked": false,
+                "viewer_count": null,
+                "viewers": null,
+                "sharing_friction_info": {
+                  "should_have_sharing_friction": false,
+                  "bloks_app_url": null
+                },
+                "can_viewer_reshare": null,
+                "ig_media_sharing_disabled": false,
+                "can_reply": true,
+                "can_reshare": true,
+                "__typename": "XDTMediaDict"
+              },
+              {
+                "pk": "3491877582201562939",
+                "id": "3491877582201562939_1624593034",
+                "has_audio": null,
+                "story_music_stickers": null,
+                "user": {
+                  "pk": "1624593034",
+                  "id": "1624593034",
+                  "interop_messaging_user_fbid": null
+                },
+                "inventory_source": null,
+                "boosted_status": null,
+                "boost_unavailable_identifier": null,
+                "boost_unavailable_reason": null,
+                "product_type": "story",
+                "carousel_media_count": null,
+                "carousel_media": null,
+                "media_overlay_info": null,
+                "caption": null,
+                "accessibility_caption": "Photo by The New York Times on November 01, 2024. Keterangan foto tidak tersedia..",
+                "image_versions2": {
+                  "candidates": [
+                    {
+                      "height": 2293,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/465458070_18476861134017035_9196830429652365646_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=vbUBabm-srkQ7kNvgFXszKF&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3NzU4MjIwMTU2MjkzOQ%3D%3D.3-ccb7-5&oh=00_AYGx8hItT3yi99mHqbdplk7gzBevgISTcbDHirslmxTnkw&oe=67D2FABC&_nc_sid=5a0a6d",
+                      "width": 1290
+                    },
+                    {
+                      "height": 1920,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/465458070_18476861134017035_9196830429652365646_n.jpg?stp=dst-jpg_e35_p1080x1080_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=vbUBabm-srkQ7kNvgFXszKF&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3NzU4MjIwMTU2MjkzOQ%3D%3D.3-ccb7-5&oh=00_AYEeB1olwFMj2y64DS_l1dPviR9QlwMKtzdjYfJYB9GDZQ&oe=67D2FABC&_nc_sid=5a0a6d",
+                      "width": 1080
+                    }
+                  ]
+                },
+                "organic_tracking_token": "eyJ2ZXJzaW9uIjo1LCJwYXlsb2FkIjp7ImlzX2FuYWx5dGljc190cmFja2VkIjp0cnVlLCJ1dWlkIjoiNjVjMmMyNmMxMjE5NDcwN2IxYWRkMmY5NDJjMTY4MWIzNDkxODc3NTgyMjAxNTYyOTM5Iiwic2VydmVyX3Rva2VuIjoiMTc0MTQ5Njg5NTUwMHwzNDkxODc3NTgyMjAxNTYyOTM5fDMwMTQ5NTE4NTk2fDZmOWY4NGE1MzM5YTQ2OWQ1ODFmNDdmYzNmNWZiMzQwNWE1ZTY1ZDhmYWRjNjRlNWU4YjBjZThhODU5NmJjYmYifSwic2lnbmF0dXJlIjoiIn0=",
+                "original_width": 1290,
+                "original_height": 2293,
+                "taken_at": 1730484265,
+                "is_dash_eligible": null,
+                "number_of_qualities": null,
+                "video_dash_manifest": null,
+                "video_versions": null,
+                "media_type": 1,
+                "visual_comment_reply_sticker_info": null,
+                "story_bloks_stickers": null,
+                "story_link_stickers": [
+                  {
+                    "x": 0.251162790697674,
+                    "y": 0.723691860465116,
+                    "width": 0.361550387596899,
+                    "height": 0.053372093023255004,
+                    "rotation": 0.0,
+                    "story_link": {
+                      "url": "https://l.instagram.com/?u=https%3A%2F%2Fwww.nytimes.com%2Fexplain%2F2024%2F10%2F28%2Finsider%2Felections-reader-questions%3Futm_source%3Dinstagram%26utm_medium%3Dsocial%26utm_campaign%3Dig-stories%26utm_content%3Dig-nytimes%26fbclid%3DPAZXh0bgNhZW0CMTEAAaZ_1_mXX9MVvwEYOsdxFIWAbjixL2jEGljiZvI-kH-ABdN_B4u2qnziqp4_aem_zhOe2dXTwGas3WdtQZEaYg%2523harris-trump-reporting-coverage%253Futm_content%253Dig-nytimes&e=AT0mK_paWj2ISkeVUm7jaOSbeAtiAit_ziVoVmqHzoQxyiP1IIA0A43MEdq_zVWepkDDEb9geI5xeUfRTq9ULm87u3UFLvoen7xT7iU"
+                    },
+                    "id": null
+                  }
+                ],
+                "story_hashtags": null,
+                "story_locations": null,
+                "story_feed_media": null,
+                "text_post_share_to_ig_story_stickers": null,
+                "story_countdowns": null,
+                "story_questions": null,
+                "story_sliders": null,
+                "story_cta": null,
+                "link": null,
+                "reel_media_background": null,
+                "video_duration": null,
+                "preview": null,
+                "expiring_at": null,
+                "is_paid_partnership": false,
+                "sponsor_tags": null,
+                "reshared_story_media_author": null,
+                "story_app_attribution": null,
+                "has_translation": false,
+                "can_see_insights_as_brand": false,
+                "audience": null,
+                "has_liked": false,
+                "viewer_count": null,
+                "viewers": null,
+                "sharing_friction_info": {
+                  "should_have_sharing_friction": false,
+                  "bloks_app_url": null
+                },
+                "can_viewer_reshare": null,
+                "ig_media_sharing_disabled": false,
+                "can_reply": true,
+                "can_reshare": true,
+                "__typename": "XDTMediaDict"
+              },
+              {
+                "pk": "3491878544232336492",
+                "id": "3491878544232336492_1624593034",
+                "has_audio": null,
+                "story_music_stickers": null,
+                "user": {
+                  "pk": "1624593034",
+                  "id": "1624593034",
+                  "interop_messaging_user_fbid": null
+                },
+                "inventory_source": null,
+                "boosted_status": null,
+                "boost_unavailable_identifier": null,
+                "boost_unavailable_reason": null,
+                "product_type": "story",
+                "carousel_media_count": null,
+                "carousel_media": null,
+                "media_overlay_info": null,
+                "caption": null,
+                "accessibility_caption": "Photo by The New York Times on November 01, 2024. Keterangan foto tidak tersedia..",
+                "image_versions2": {
+                  "candidates": [
+                    {
+                      "height": 2293,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/464984771_18476861416017035_1658967424662754012_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=WydbHvKNkgcQ7kNvgG11z0-&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3ODU0NDIzMjMzNjQ5Mg%3D%3D.3-ccb7-5&oh=00_AYHtnQizRqfhBlYFfiMz1AzH4bStQgQbRBYtTwp7YDDO8g&oe=67D30A56&_nc_sid=5a0a6d",
+                      "width": 1290
+                    },
+                    {
+                      "height": 1920,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/464984771_18476861416017035_1658967424662754012_n.jpg?stp=dst-jpg_e35_p1080x1080_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=WydbHvKNkgcQ7kNvgG11z0-&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3ODU0NDIzMjMzNjQ5Mg%3D%3D.3-ccb7-5&oh=00_AYHpaCrLyU9D9unCk4NpaIJnvFl9EDiP9TUzxACHSMUqbw&oe=67D30A56&_nc_sid=5a0a6d",
+                      "width": 1080
+                    }
+                  ]
+                },
+                "organic_tracking_token": "eyJ2ZXJzaW9uIjo1LCJwYXlsb2FkIjp7ImlzX2FuYWx5dGljc190cmFja2VkIjp0cnVlLCJ1dWlkIjoiNjVjMmMyNmMxMjE5NDcwN2IxYWRkMmY5NDJjMTY4MWIzNDkxODc4NTQ0MjMyMzM2NDkyIiwic2VydmVyX3Rva2VuIjoiMTc0MTQ5Njg5NTUwMHwzNDkxODc4NTQ0MjMyMzM2NDkyfDMwMTQ5NTE4NTk2fDBlYzMwMGU3ZGZmOTIwZTAwNTI5YjEyYzYwNjMzNDk5MWQ4MmQ1M2NlZjM0MzFhMDM2ZWY3ODE5OTdkY2UzNzEifSwic2lnbmF0dXJlIjoiIn0=",
+                "original_width": 1290,
+                "original_height": 2293,
+                "taken_at": 1730484380,
+                "is_dash_eligible": null,
+                "number_of_qualities": null,
+                "video_dash_manifest": null,
+                "video_versions": null,
+                "media_type": 1,
+                "visual_comment_reply_sticker_info": null,
+                "story_bloks_stickers": null,
+                "story_link_stickers": [
+                  {
+                    "x": 0.250387608727743,
+                    "y": 0.7306685979976201,
+                    "width": 0.361550387596899,
+                    "height": 0.053372093023255004,
+                    "rotation": 0.0,
+                    "story_link": {
+                      "url": "https://l.instagram.com/?u=https%3A%2F%2Fwww.nytimes.com%2Fexplain%2F2024%2F10%2F28%2Finsider%2Felections-reader-questions%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAaaNvM0jolHb6YwwOnRWdtStB1Y7Eq0yWI9qKZBEQ8KpzQr_KfwDBREDtQM_aem_Gt2ohHLiAtFRfuafU5R5cg%2523your-questions-about-the-timess-election-coverage-choosing-which-reporters-cover-which-candidates%253Futm_content%253Dig-nytimes&e=AT10YvVzIKQ3vP6gyA5aOEPmW01u24CYwW69ZVQQ2FDqFzwOCajKhoSzdxQKfEBPQTp00yPfarV1d4EM8xFM4l-DWcNF6BpAhPG4fdg"
+                    },
+                    "id": null
+                  }
+                ],
+                "story_hashtags": null,
+                "story_locations": null,
+                "story_feed_media": null,
+                "text_post_share_to_ig_story_stickers": null,
+                "story_countdowns": null,
+                "story_questions": null,
+                "story_sliders": null,
+                "story_cta": null,
+                "link": null,
+                "reel_media_background": null,
+                "video_duration": null,
+                "preview": null,
+                "expiring_at": null,
+                "is_paid_partnership": false,
+                "sponsor_tags": null,
+                "reshared_story_media_author": null,
+                "story_app_attribution": null,
+                "has_translation": false,
+                "can_see_insights_as_brand": false,
+                "audience": null,
+                "has_liked": false,
+                "viewer_count": null,
+                "viewers": null,
+                "sharing_friction_info": {
+                  "should_have_sharing_friction": false,
+                  "bloks_app_url": null
+                },
+                "can_viewer_reshare": null,
+                "ig_media_sharing_disabled": false,
+                "can_reply": true,
+                "can_reshare": true,
+                "__typename": "XDTMediaDict"
+              },
+              {
+                "pk": "3491878797887110594",
+                "id": "3491878797887110594_1624593034",
+                "has_audio": null,
+                "story_music_stickers": null,
+                "user": {
+                  "pk": "1624593034",
+                  "id": "1624593034",
+                  "interop_messaging_user_fbid": null
+                },
+                "inventory_source": null,
+                "boosted_status": null,
+                "boost_unavailable_identifier": null,
+                "boost_unavailable_reason": null,
+                "product_type": "story",
+                "carousel_media_count": null,
+                "carousel_media": null,
+                "media_overlay_info": null,
+                "caption": null,
+                "accessibility_caption": "Photo by The New York Times on November 01, 2024. Keterangan foto tidak tersedia..",
+                "image_versions2": {
+                  "candidates": [
+                    {
+                      "height": 2293,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/465079866_18476861503017035_5948690263508705263_n.jpg?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=OQAHPuj5KfAQ7kNvgHmRZO_&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3ODc5Nzg4NzExMDU5NA%3D%3D.3-ccb7-5&oh=00_AYHrNL5phrfqxUaBWYjp4EWRryDwU-hVl6TudDPI7NEh7A&oe=67D2ED17&_nc_sid=5a0a6d",
+                      "width": 1290
+                    },
+                    {
+                      "height": 1920,
+                      "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-15/465079866_18476861503017035_5948690263508705263_n.jpg?stp=dst-jpg_e35_p1080x1080_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMjkweDIyOTMuc2RyLmY3NTc2MS5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AF6Q4kdnldBH7aMYQhUM4PgThcwiIBEJRx7nHlIA4oMRrAWGVqGyIi8Z-2MzJbp7yQ&_nc_ohc=OQAHPuj5KfAQ7kNvgHmRZO_&_nc_gid=65c2c26c12194707b1add2f942c1681b&edm=AGFyKLkBAAAA&ccb=7-5&ig_cache_key=MzQ5MTg3ODc5Nzg4NzExMDU5NA%3D%3D.3-ccb7-5&oh=00_AYFtmQKJ4DMYu6HVTMsA1OHKFkNMNn8Xrieo-KgKwl-etA&oe=67D2ED17&_nc_sid=5a0a6d",
+                      "width": 1080
+                    }
+                  ]
+                },
+                "organic_tracking_token": "eyJ2ZXJzaW9uIjo1LCJwYXlsb2FkIjp7ImlzX2FuYWx5dGljc190cmFja2VkIjp0cnVlLCJ1dWlkIjoiNjVjMmMyNmMxMjE5NDcwN2IxYWRkMmY5NDJjMTY4MWIzNDkxODc4Nzk3ODg3MTEwNTk0Iiwic2VydmVyX3Rva2VuIjoiMTc0MTQ5Njg5NTUwMXwzNDkxODc4Nzk3ODg3MTEwNTk0fDMwMTQ5NTE4NTk2fGRlNjVlNDMxZTU0NjRkMmY4NTk1MTFhMDhjOGVjZjU5ZjkzZGZmZGVkMTkwMzNiNmYwNWVjOWJjMTZlOTdlN2QifSwic2lnbmF0dXJlIjoiIn0=",
+                "original_width": 1290,
+                "original_height": 229

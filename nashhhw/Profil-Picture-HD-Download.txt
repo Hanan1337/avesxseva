@@ -1,0 +1,113 @@
+{
+  "data": {
+    "user": {
+      "friendship_status": {
+        "following": false,
+        "blocking": false,
+        "is_feed_favorite": false,
+        "outgoing_request": false,
+        "followed_by": false,
+        "incoming_request": false,
+        "is_restricted": false,
+        "is_bestie": false,
+        "muting": false,
+        "is_muting_reel": false
+      },
+      "gating": null,
+      "is_memorialized": false,
+      "is_private": false,
+      "has_story_archive": null,
+      "supervision_info": null,
+      "is_regulated_c18": true,
+      "regulated_news_in_locations": [
+        "CA"
+      ],
+      "bio_links": [
+        {
+          "image_url": "",
+          "is_pinned": false,
+          "link_type": "external",
+          "lynx_url": "https://l.instagram.com/?u=http%3A%2F%2Fnytimes.com%2Finstagram%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAabvaxgBYifPLOENe8-PhRKzUA52E3OhCER_mfXn9KRLBFONpS0-2UZtgog_aem_Dyspo2Y3_YugkqMpSkD-3g&e=AT21uE-QM-BP-_0EAjaEU6Y-fAzhvR4lDzam1au4-0GjidnnGDNphDrdgM75pPk2YSJ0U_yVd3c5XYW0Se1FNrkoEjFUUNgSRsIouEU",
+          "media_type": "none",
+          "title": "",
+          "url": "http://nytimes.com/instagram"
+        }
+      ],
+      "text_post_app_badge_label": "nytimes",
+      "show_text_post_app_badge": true,
+      "username": "nytimes",
+      "text_post_new_post_count": 0,
+      "pk": "1624593034",
+      "live_broadcast_visibility": null,
+      "live_broadcast_id": null,
+      "profile_pic_url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-19/27575653_434411333664606_8937069671522238464_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=1&_nc_oc=Q6cZ2AGsOCtijkufP09CyHfKux6Ra3EWryNyNLZcGEmuIvYjiWW4xrHME9Engefw9cS1zR8&_nc_ohc=yX54LZwtnsUQ7kNvgHd45FU&_nc_gid=1dcbdbb83fbc44d294d600435dcf9ffe&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYHZLFO3CLRtqbjxmXfMwjq0-p-6ogh5hKczPw_GvUtFMA&oe=67D2E8A2&_nc_sid=7d3ac5",
+      "hd_profile_pic_url_info": {
+        "url": "https://instagram.fjog3-1.fna.fbcdn.net/v/t51.2885-19/27575653_434411333664606_8937069671522238464_n.jpg?_nc_ht=instagram.fjog3-1.fna.fbcdn.net&_nc_cat=1&_nc_oc=Q6cZ2AGsOCtijkufP09CyHfKux6Ra3EWryNyNLZcGEmuIvYjiWW4xrHME9Engefw9cS1zR8&_nc_ohc=yX54LZwtnsUQ7kNvgHd45FU&_nc_gid=1dcbdbb83fbc44d294d600435dcf9ffe&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AYGZone0gmaJZ1EbhwcqkAU0IXRR0pJabn7i1Hi2XPnuUQ&oe=67D2E8A2&_nc_sid=7d3ac5"
+      },
+      "is_unpublished": false,
+      "latest_reel_media": 1741476228,
+      "has_profile_pic": null,
+      "profile_pic_genai_tool_info": [],
+      "biography": "We seek the truth and help people understand the world.",
+      "full_name": "The New York Times",
+      "is_verified": true,
+      "show_account_transparency_details": true,
+      "account_type": 2,
+      "follower_count": 18789164,
+      "mutual_followers_count": 7,
+      "profile_context_links_with_user_ids": [
+        {
+          "username": "majalahmediakeuangan",
+          "id": null
+        },
+        {
+          "username": "hariankompas",
+          "id": null
+        },
+        {
+          "username": null,
+          "id": null
+        }
+      ],
+      "address_street": "",
+      "city_name": "",
+      "is_business": true,
+      "zip": "",
+      "biography_with_entities": {
+        "entities": []
+      },
+      "category": "",
+      "should_show_category": true,
+      "account_badges": [],
+      "ai_agent_type": null,
+      "fb_profile_bio_link_web": null,
+      "external_lynx_url": "https://l.instagram.com/?u=http%3A%2F%2Fnytimes.com%2Finstagram%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAabvaxgBYifPLOENe8-PhRKzUA52E3OhCER_mfXn9KRLBFONpS0-2UZtgog_aem_Dyspo2Y3_YugkqMpSkD-3g&e=AT21uE-QM-BP-_0EAjaEU6Y-fAzhvR4lDzam1au4-0GjidnnGDNphDrdgM75pPk2YSJ0U_yVd3c5XYW0Se1FNrkoEjFUUNgSRsIouEU",
+      "external_url": "http://nytimes.com/instagram",
+      "pronouns": [],
+      "transparency_label": null,
+      "transparency_product": null,
+      "has_chaining": true,
+      "remove_message_entrypoint": false,
+      "fbid_v2": "17841400511045384",
+      "is_embeds_disabled": true,
+      "is_professional_account": null,
+      "following_count": 619,
+      "media_count": 20122,
+      "total_clips_count": 1,
+      "latest_besties_reel_media": 0,
+      "reel_media_seen_timestamp": 1741461298,
+      "id": "1624593034"
+    },
+    "viewer": {
+      "user": {
+        "pk": "30149518596",
+        "id": "30149518596",
+        "can_see_organic_insights": false
+      }
+    }
+  },
+  "extensions": {
+    "is_final": true
+  },
+  "status": "ok"
+}
