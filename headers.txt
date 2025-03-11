@@ -1,58 +1,41 @@
 import requests
 import json
 
-url = "https://api.hyperliquid.xyz/info"
+url = "https://www.binance.com/bapi/futures/v2/public/future/leaderboard/getOtherPerformance"
 
 payload = {
-  "type": "frontendOpenOrders",
-  "user": "0xa23190045c4aebeb724844ce622465475e539bae"
+  "encryptedUid": "82EC62BBFE5E390EDB540A689FEA9758",
+  "tradeType": "PERPETUAL"
 }
 
 headers = {
-  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Mobile Safari/537.36",
+  'User-Agent': "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36",
   'Accept-Encoding': "gzip, deflate, br, zstd",
   'Content-Type': "application/json",
   'sec-ch-ua-platform': "\"Android\"",
-  'sec-ch-ua': "\"Not(A:Brand\";v=\"99\", \"Google Chrome\";v=\"133\", \"Chromium\";v=\"133\"",
-  'DNT': "1",
+  'csrftoken': "dfc25241a14b9fe62067f99dc5e66f28",
+  'lang': "en",
+  'sec-ch-ua': "\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"",
   'sec-ch-ua-mobile': "?1",
-  'Origin': "https://hyperdash.info",
-  'Sec-Fetch-Site': "cross-site",
-  'Sec-Fetch-Mode': "cors",
-  'Sec-Fetch-Dest': "empty",
-  'Referer': "https://hyperdash.info/",
-  'Accept-Language': "en-US,en;q=0.9,id;q=0.8"
+  'fvideo-id': "332188f1aec7a545998fdd60326dc9fe6c8a1f8d",
+  'bnc-uuid': "663971ff-d5cd-46a9-b629-0f8ca31f86ac",
+  'x-passthrough-token': "",
+  'fvideo-token': "VY8xmZbkGJOVeBYTD+ZGPXr2Cu+ZzKiyS8eyHx/76ad+Qxk5qEao6/fe29cG/9kUnSg87BVTYS5yVPys6Bzisww4/EG93EpXOnbG2PGhpSAJs0jOcsNyHzHzlCwnRvqxHEoZ26SitfyKCbxZlKBGepExOt2ksEqLhNUwQ8ZHrTmAD25ktFcIc2V8vtW8S0N1g=1d",
+  'x-trace-id': "2c94ae40-7f21-4785-aabf-c9560fa6360b",
+  'x-ui-request-trace': "2c94ae40-7f21-4785-aabf-c9560fa6360b",
+  'clienttype': "web",
+  'device-info': "eyJzY3JlZW5fcmVzb2x1dGlvbiI6IjgzNSwzNzYiLCJhdmFpbGFibGVfc2NyZWVuX3Jlc29sdXRpb24iOiI4MzUsMzc2Iiwic3lzdGVtX3ZlcnNpb24iOiJBbmRyb2lkIDEwIiwiYnJhbmRfbW9kZWwiOiJtb2JpbGUgIEsgIiwic3lzdGVtX2xhbmciOiJlbi1VUyIsInRpbWV6b25lIjoiR01UKzA3OjAwIiwidGltZXpvbmVPZmZzZXQiOi00MjAsInVzZXJfYWdlbnQiOiJNb3ppbGxhLzUuMCAoTGludXg7IEFuZHJvaWQgMTA7IEspIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS8xMzQuMC4wLjAgTW9iaWxlIFNhZmFyaS81MzcuMzYiLCJsaXN0X3BsdWdpbiI6IiIsImNhbnZhc19jb2RlIjoiZTAxODM2YTIiLCJ3ZWJnbF92ZW5kb3IiOiJBUk0iLCJ3ZWJnbF9yZW5kZXJlciI6Ik1hbGktRzcyMC1JbW1vcnRhbGlzIE1DMTIiLCJhdWRpbyI6IjEyNC4wODA3Mjc2NjEwNTAzMyIsInBsYXRmb3JtIjoiTGludXggYXJtdjgxIiwid2ViX3RpbWV6b25lIjoiQXNpYS9KYWthcnRhIiwiZGV2aWNlX25hbWUiOiJDaHJvbWUgVjEzNC4wLjAuMCAoQW5kcm9pZCkiLCJmaW5nZXJwcmludCI6IjYyZGViMDQ4ODQ0YjIwNGM0YjI1NjU4NmUyZDE4OWI4IiwiZGV2aWNlX2lkIjoiIiwicmVsYXRlZF9kZXZpY2VfaWRzIjoiIn0=",
+  'dnt': "1",
+  'origin': "https://www.binance.com",
+  'sec-fetch-site': "same-origin",
+  'sec-fetch-mode': "cors",
+  'sec-fetch-dest': "empty",
+  'referer': "https://www.binance.com/en/futures-activity/leaderboard/user/um?encryptedUid=82EC62BBFE5E390EDB540A689FEA9758",
+  'accept-language': "en-US,en;q=0.9,id;q=0.8",
+  'priority': "u=1, i",
+  'Cookie': "bnc-uuid=663971ff-d5cd-46a9-b629-0f8ca31f86ac; _ga=GA1.2.1768163099.1739707121; BNC_FV_KEY=332188f1aec7a545998fdd60326dc9fe6c8a1f8d; language=en; se_gd=QQWUlXRsBHWCgEMdRV1NgZZAFBg9TBWUFEOJYV0NVhdUQBlNWUBc1; se_gsd=VjA1Cjd6LDUiMxEhNwg7MzIyGQxaBwJQVFhKUVFSUFhbVFNT1; currentAccount=; logined=y; BNC-Location=ID; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2265165582%22%2C%22first_id%22%3A%221950e9ff70f4ea-012d04fc8efeaa6-b457453-313960-1950e9ff710711%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22identities%22%3A%22eyIkaWRlbnRpdHlfY29va2llX2lkIjoiMTk1MGU5ZmY3MGY0ZWEtMDEyZDA0ZmM4ZWZlYWE2LWI0NTc0NTMtMzEzOTYwLTE5NTBlOWZmNzEwNzExIiwiJGlkZW50aXR5X2xvZ2luX2lkIjoiNjUxNjU1ODIifQ%3D%3D%22%2C%22history_login_id%22%3A%7B%22name%22%3A%22%24identity_login_id%22%2C%22value%22%3A%2265165582%22%7D%2C%22%24device_id%22%3A%221950e9ff70f4ea-012d04fc8efeaa6-b457453-313960-1950e9ff710711%22%7D; _gid=GA1.2.2144539986.1741605908; aws-waf-token=79cf6af3-0837-4444-8df5-dbe68fc66cc9:BgoAqKo5An0qAAAA:07+O9T89AGTUaznjn0UcIA8TxJI+GofpZflzXvfEQ76wQ+iPiJ22tN/wkscF867DDS4UexmuVHqYmNTEp/8NLOVv8x86XmSJRZyQ5cD3N3WoroA6XvrGRh3wNMVhBOQVW3Accoz7ansWaPWq5slfFaUdYXzBiP6FvGggRueyMmipRvY7cMlK9FwP2/Yd47v8xW42PpEww3zvIQ==; BNC_FV_KEY_T=101-mIJG%2BrivZcKApbctHLPD79uzIN1HQuW9THUlM4W%2F%2FZMVWc6IxrGldR7mpNNW2wAKp3YOqAFyU378OECKL%2F5z6Q%3D%3D-l32nNmy%2FGKm6xAzBpV8Jdg%3D%3D-b4; BNC_FV_KEY_EXPIRE=1741702333742; se_sd=glVVRWwEaHHExwCIRVwggZZHgUxkXEQV1BcdfVkRlBSWwUFNWVRR1; s9r1=9E5E771DB85B7F685D0D27F227459910; cr00=6ABCCA73511E0C2CBA98E8B0659EC692; d1og=web.65165582.79B47D99E85465E0EE20BECAEC4B8D3F; r2o1=web.65165582.11291EFE92D2233E25B1DC7BF92C5F52; f30l=web.65165582.5022D1501E1C83988CB658D581E33DFC; p20t=web.65165582.089E97768831A2A2B05574775A535DEB; lang=en; theme=dark; OptanonConsent=isGpcEnabled=0&datestamp=Tue+Mar+11+2025+15%3A13%3A14+GMT%2B0700+(Western+Indonesia+Time)&version=202411.2.0&browserGpcFlag=0&isIABGlobal=false&hosts=&consentId=61df43e7-3349-4dee-b2d8-ef6f4127b69e&interactionCount=0&isAnonUser=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0003%3A1%2CC0004%3A0%2CC0002%3A1&AwaitingReconsent=false"
 }
 
 response = requests.post(url, data=json.dumps(payload), headers=headers)
 
 print(response.text)
-
-
-
-
-
-[
-  {
-    "coin": "LTC",
-    "side": "A",
-    "limitPx": "85.744",
-    "sz": "135.0",
-    "oid": 76787585780,
-    "timestamp": 1741034245309,
-    "triggerCondition": "Price below 93.2",
-    "isTrigger": true,
-    "triggerPx": "93.2",
-    "children": [],
-    "isPositionTpsl": false,
-    "reduceOnly": true,
-    "orderType": "Stop Market",
-    "origSz": "135.0",
-    "tif": null,
-    "cloid": null
-  }
-]
-
-
-
-
